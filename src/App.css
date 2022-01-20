@@ -1,5 +1,9 @@
+@import 'rsuite/dist/rsuite.min.css';
+
 .App {
   text-align: center;
+  margin-left: 2rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .App-logo {
