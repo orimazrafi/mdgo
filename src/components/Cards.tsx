@@ -7,11 +7,11 @@ import { useForm } from "react-hook-form";
 import db from "../db.json";
 import Card from "./Card";
 import ModalComponent from "./Modal";
-import styled from "styled-components"
-import { Button, Loader } from "rsuite";
+import { Button } from "rsuite";
 import * as Interface from "../interface"
 import * as hooks from "../hooks"
 import * as CONSTANTS from "../constants"
+import * as Elements from "../elements"
 
 const Cards =()=>{
     const [photo, setPhoto] = useState<Interface.Photoprops>();
@@ -102,13 +102,13 @@ const Cards =()=>{
 
     return (
     <div>
-        <CardsFunctionality>
+        <Elements.CardsFunctionality>
             <Button onClick={handleIncrement} disabled={pageNumber === 1} >Prev page</Button>
             <Button onClick={handleDecrement} disabled={pageNumber === maxPage}>Next page</Button>
             <Button onClick={handleOpenModal} appearance="primary">add card</Button>
-            {<RelativeWrapper>{(isFetching || isLoading) &&<LoaderWrapper size="md" content="Loading..." />}</RelativeWrapper>}
-        </CardsFunctionality>
-        <CardsWrapper>
+            {<Elements.RelativeWrapper>{(isFetching || isLoading) &&<Elements.LoaderWrapper size="md" content="Loading..." />}</Elements.RelativeWrapper>}
+        </Elements.CardsFunctionality>
+        <Elements.CardsWrapper>
             {data?.data?.map((photo: Interface.Photoprops) => 
                 <Card 
                     key={photo?.id}
@@ -119,7 +119,7 @@ const Cards =()=>{
                     resetPreview={resetPreview}
                     />
             )}
-        </CardsWrapper>
+        </Elements.CardsWrapper>
         <ModalComponent
             open={open}
             handleClose={handleClose}
@@ -137,24 +137,3 @@ const Cards =()=>{
 
 export default Cards
 
-const CardsFunctionality =styled.div`
-    display:flex;
-    gap:1rem;
-    margin:2rem 0;
-    justify-content:center;    
-`;
-
-const LoaderWrapper = styled(Loader)`
-    position: absolute;
-    left:2rem;
-`;
-
-const CardsWrapper =styled.section`
-    display:flex;
-    gap:1rem;
-    flex-wrap: wrap;
-`;
-
-const RelativeWrapper = styled.div`
-    position: relative;
-`;
